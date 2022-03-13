@@ -5,7 +5,7 @@ import (
 	// "time"
 )
 
-func longRunningTask(text string) <-chan string {
+func task(text string) <-chan string {
 	r := make(chan string)
 
 	go func() {
@@ -17,8 +17,8 @@ func longRunningTask(text string) <-chan string {
 }
 
 func main() {
-	sayHello := <-longRunningTask("Hello")
-    world := <-longRunningTask(sayHello+" World !")
+	sayHello := <-task("Hello")
+    world := <-task(sayHello+" World !")
     // time.Sleep(time.Second * 3)
     fmt.Println(world)
 }
@@ -28,11 +28,11 @@ func main() {
 // Async Await
 // **********
 
-// const longRunningTask = async () => {
+// const task = async () => {
 // // simulate a workload
 // sleep(3000);
 // 	return Math.floor(Math.random() * Math.floor(100));
 // };
 
-// const r = await longRunningTask();
+// const r = await task();
 // console.log(r);
